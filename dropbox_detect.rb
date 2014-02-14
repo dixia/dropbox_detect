@@ -15,7 +15,7 @@ options = OpenStruct.new
 options.list_interfaces = false
 options.using_interface = nil
 
-OptionParser.new do |opts|
+optparser = OptionParser.new do |opts|
   #TODO make usage works? 
   opts.banner = "Usage: example.rb [options]"
   
@@ -26,7 +26,14 @@ OptionParser.new do |opts|
   opts.on("-I","List all interfaces") do |l|
     options.list_interfaces = l
   end
-end.parse! ARGV
+end
+
+if ARGV.size < 1
+  puts optparser
+  exit
+end
+
+optparser.parse! ARGV
 
 if options.list_interfaces
   puts "List of interfaces:"
@@ -76,4 +83,3 @@ loop do
     exit
   end
 end
-
